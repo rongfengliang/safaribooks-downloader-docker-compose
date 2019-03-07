@@ -24,3 +24,5 @@ function init()
     end
     ngx.say(stdout)
 end
+
+return init;
