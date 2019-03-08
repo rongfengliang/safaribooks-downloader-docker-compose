@@ -11,6 +11,8 @@ from https://learning.oreilly.com
 
 * add account env file && add you account info
 
+> note you can alse pass the account info to request body
+
 ```code
 touch .account.env
 
@@ -24,12 +26,27 @@ PASSWORD=<youpassword>
 
 * use curl or other http utils
 
+no need account info with  build in account
+
 ```code
 curl -X POST \
   http://localhost:8888/download \
   -H 'Content-Type: application/json' \
   -d '{
 	"ebookid":"<ebookid>"
+}'
+```
+
+or  use your accountinfo
+
+```code
+curl -X POST \
+  http://localhost:8888/download \
+  -H 'Content-Type: application/json' \
+  -d '{
+	"ebookid":"<ebookid>",
+  "username":"<accountid>",
+  "password":"<password>"
 }'
 ```
 
