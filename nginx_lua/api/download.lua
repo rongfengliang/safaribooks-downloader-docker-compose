@@ -3,8 +3,8 @@
 
 local json = require("cjson")
 local shell = require "resty.shell"
-
-function exec_shell(ebookid,storagepath,username,password)
+local ngx = ngx;
+local function exec_shell(ebookid,storagepath,username,password)
    -- for simple use ebookid
    local filename = ebookid..".epub"
    local defaultstoragepath = (storagepath or "/app/")..filename
@@ -13,7 +13,7 @@ function exec_shell(ebookid,storagepath,username,password)
    return "/app/safaribooks-downloader".." -b "..ebookid.." ".." -o "..defaultstoragepath.." -u "..username.." -p "..password
 end
 
-function init()
+local function init()
     ngx.req.read_body()
     local method_name = ngx.req.get_method()
     if method_name ~= "POST" then
@@ -31,11 +31,12 @@ function init()
     if downloadinfo ~=nil then
        if downloadinfo.ebookid ==nil then
            ngx.say("please pass ebook id ")
-           return 
+           return nil
        end
+       -- if not provide username && password use myself  && set by os env
        if downloadinfo.username == nil or  downloadinfo.password == nil then
-           ngx.say("must provide  user account info ")
-           return
+           downloadinfo.username=os.getenv("USERNAME")
+           downloadinfo.password=os.getenv("PASSWORD")
        end
     end
     local execommand = exec_shell(downloadinfo.ebookid,"/opt/ebooks/",downloadinfo.username,downloadinfo.password)

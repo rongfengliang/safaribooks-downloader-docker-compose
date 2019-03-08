@@ -4,6 +4,8 @@ services:
     build: ./
     ports:
     - "8888:8080"
+    env_file:
+    - .account.env
     volumes:
     - "./nginx_lua/:/opt/app/"
     - "./ebooks/:/opt/ebooks/"
