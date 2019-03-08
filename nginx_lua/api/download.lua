@@ -10,7 +10,7 @@ function exec_shell(ebookid,storagepath,username,password)
    local defaultstoragepath = (storagepath or "/app/")..filename
    --  exec shell format  -b ebookid  -o output directory
    --  safaribooks-downloader -b <ebookid> -u <id> -p <password> -o /Users/dalong/Desktop/testbook.epub
-   return "/app/safaribooks-downloader".." -b "..ebookid.." ".." -o "..defaultstoragepath.." -u "..username.." -p "..password.." -d"
+   return "/app/safaribooks-downloader".." -b "..ebookid.." ".." -o "..defaultstoragepath.." -u "..username.." -p "..password
 end
 
 function init()
@@ -35,10 +35,11 @@ function init()
        end
        if downloadinfo.username == nil or  downloadinfo.password == nil then
            ngx.say("must provide  user account info ")
-           return 
+           return
        end
     end
-    local execommand = exec_shell(downloadinfo.ebookid,"/opt/ebooks/",downloadinfo.username,downloadinfo.password)
+    local execommand = exec_shell(downloadinfo.ebookid,nil,downloadinfo.username,downloadinfo.password)
+    ngx.say(execommand)
     local timeout = 300000  -- ms
     local max_size = 409600  -- byte
     local ok, stdout, stderr, reason, status =
