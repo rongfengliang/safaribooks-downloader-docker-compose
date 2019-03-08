@@ -1,6 +1,5 @@
 # safaribooks-downloader with docker-compose
 
-
 ## how to download ebooks
 
 * create one oreilly account
@@ -20,6 +19,14 @@ content like below
 
 USERNAME=<yourid>
 PASSWORD=<youpassword>
+```
+
+* start server
+
+>  with docker-compose running
+
+```code
+docker-compose up -d
 ```
 
 ## do download
