@@ -10,7 +10,7 @@ local function exec_shell(ebookid,storagepath,username,password)
    local defaultstoragepath = (storagepath or "/app/")..filename
    --  exec shell format  -b ebookid  -o output directory
    --  safaribooks-downloader -b <ebookid> -u <id> -p <password> -o /Users/dalong/Desktop/testbook.epub
-   return "/app/safaribooks-downloader".." -b "..ebookid.." ".." -o "..defaultstoragepath.." -u "..username.." -p "..password
+   return "/app/safaribooks-downloader".." -b "..ebookid.." ".." -o "..defaultstoragepath.." -u "..username.." -p "..password.." && rm -rf books"
 end
 
 local function init()
