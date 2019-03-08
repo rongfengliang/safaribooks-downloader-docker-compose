@@ -38,8 +38,8 @@ function init()
            return
        end
     end
-    local execommand = exec_shell(downloadinfo.ebookid,nil,downloadinfo.username,downloadinfo.password)
-    ngx.say(execommand)
+    local execommand = exec_shell(downloadinfo.ebookid,"/opt/ebooks/",downloadinfo.username,downloadinfo.password)
+    -- ngx.say(execommand)
     local timeout = 300000  -- ms
     local max_size = 409600  -- byte
     local ok, stdout, stderr, reason, status =
